@@ -1,0 +1,542 @@
+VALENTIUS INTERNSHIP – TASK 2 PROMPT ENGINEERING EXPERIMENT REPORT
+
+Task: Prompt Engineering Submission deadline: 22 November 2026 Platform
+selected: Google AI Studio Model: Gemini (record the exact model
+name/version used during testing) Prepared by: [Your Name] Date of
+testing: [Enter date]
+
+============================================================ 1.
+INTRODUCTION
+============================================================
+
+Prompt engineering is the process of designing and refining instructions
+given to a generative AI model so that it produces useful, accurate, and
+consistent responses. A well-designed prompt specifies the task,
+provides context, defines constraints, and describes the required output
+format.
+
+This report explores three prompt-engineering techniques:
+
+1.  Zero-shot prompting versus few-shot prompting.
+2.  Direct prompting versus a request for step-by-step problem solving.
+3.  Structured output generation using a JSON schema.
+
+Google AI Studio with Gemini was selected as the testing environment.
+The experiments use practical examples involving customer feedback,
+arithmetic reasoning, and invoice data extraction.
+
+IMPORTANT EVIDENCE NOTE: The prompts and test cases below are prepared
+for the experiment. Any outputs labelled “ILLUSTRATIVE SAMPLE OUTPUT”
+are examples of the expected response format, not verified outputs from
+a live Google AI Studio run. Before submitting this report as an
+experimental record, run each prompt in Google AI Studio and replace the
+illustrative samples with the exact, unedited model responses. Record
+the exact model name and testing date.
+
+============================================================ 2.
+OBJECTIVES ============================================================
+
+-   Understand how zero-shot and few-shot prompts affect classification.
+-   Compare a direct answer prompt with a prompt requesting concise
+    calculation steps.
+-   Test whether an AI model can return data in a consistent JSON
+    structure.
+-   Evaluate response correctness, format compliance, and consistency.
+-   Identify strengths and limitations of each prompting technique.
+
+============================================================ 3.
+EXPERIMENT 1 – ZERO-SHOT VS FEW-SHOT PROMPTING
+============================================================
+
+3.1 Aim
+
+To compare the performance of zero-shot and few-shot prompting on a
+customer-review sentiment classification task.
+
+3.2 Task
+
+Classify each customer review into exactly one of the following
+categories:
+
+-   Positive
+-   Negative
+-   Neutral
+
+The same three test reviews are used for both prompts to make the
+comparison fair.
+
+3.3 Test input
+
+Review 1: “The delivery was late, but the product quality is excellent.”
+
+Review 2: “I am extremely disappointed with the service.”
+
+Review 3: “The package arrived yesterday.”
+
+3.4 Zero-shot prompt
+
+You are a customer feedback classifier.
+
+Classify each customer review into exactly one of these categories:
+Positive, Negative, Neutral.
+
+Return only the category. Do not explain.
+
+Review: “The delivery was late, but the product quality is excellent.”
+Review: “I am extremely disappointed with the service.” Review: “The
+package arrived yesterday.”
+
+3.5 Zero-shot output – illustrative sample only
+
+1.  Positive
+2.  Negative
+3.  Neutral
+
+
+
+3.6 Few-shot prompt
+
+You are a customer feedback classifier.
+
+Classify reviews as Positive, Negative, or Neutral. Follow these
+examples:
+
+Review: “Amazing product, I love it!” Category: Positive
+
+Review: “The service was terrible.” Category: Negative
+
+Review: “The order arrived on Monday.” Category: Neutral
+
+Review: “Very helpful staff and quick service.” Category: Positive
+
+Now classify these reviews:
+
+Review: “The delivery was late, but the product quality is excellent.”
+Review: “I am extremely disappointed with the service.” Review: “The
+package arrived yesterday.”
+
+Return only the categories in order.
+
+3.7 Few-shot output – illustrative sample only
+
+1.  Positive
+2.  Negative
+3.  Neutral
+
+
+3.8 Expected classification and evaluation
+
+Review 1: Positive (the product quality is excellent, although delivery
+was late). Review 2: Negative (the customer is extremely disappointed).
+Review 3: Neutral (the statement gives information without expressing an
+opinion).
+
+Evaluation table:
+
+Test review 1: Expected label: Positive Zero-shot sample: Positive
+Few-shot sample: Positive
+
+Test review 2: Expected label: Negative Zero-shot sample: Negative
+Few-shot sample: Negative
+
+Test review 3: Expected label: Neutral Zero-shot sample: Neutral
+Few-shot sample: Neutral
+
+Sample accuracy calculation: Accuracy = (Number of correct
+classifications / Total classifications) x 100
+
+For the illustrative labels above: Zero-shot sample accuracy = 3/3 x 100
+= 100% Few-shot sample accuracy = 3/3 x 100 = 100%
+
+These percentages are calculated from the illustrative samples only.
+Recalculate them using the actual model responses.
+
+3.9 Analysis
+
+Zero-shot prompting provides the task instructions without examples. It
+is concise and useful when the model already understands the task.
+
+Few-shot prompting includes labelled examples before the new inputs. The
+examples demonstrate the expected relationship between a review and its
+category. This can help the model follow the desired classification
+pattern and output format.
+
+The mixed-sentiment first review is potentially ambiguous because it
+contains both a negative delivery experience and positive product
+feedback. A consistent classification policy is important. In this
+experiment, the overall sentiment is treated as Positive because the
+positive product-quality statement is the main evaluative statement. If
+a different policy is preferred, it should be defined before testing.
+
+3.10 Result
+
+The experiment demonstrates how examples can guide a model’s response.
+The final conclusion must be based on the actual outputs collected from
+Google AI Studio, not only on the illustrative samples.
+
+============================================================ 4.
+EXPERIMENT 2 – DIRECT PROMPTING VS STEP-BY-STEP INSTRUCTIONS
+============================================================
+
+4.1 Aim
+
+To compare a direct prompt with a prompt that asks the model to present
+concise calculation steps for a multi-step arithmetic problem.
+
+4.2 Problem statement
+
+A shopkeeper buys 5 notebooks for Rs. 40 each. He sells 3 notebooks for
+Rs. 55 each and the remaining 2 notebooks for Rs. 35 each. Calculate the
+total profit or loss.
+
+4.3 Direct prompt
+
+A shopkeeper buys 5 notebooks for Rs. 40 each. He sells 3 notebooks for
+Rs. 55 each and the remaining 2 notebooks for Rs. 35 each. Calculate the
+total profit or loss. Give only the final answer.
+
+4.4 Direct output – illustrative sample only
+
+The total profit is Rs. 35.
+
+Replace this section with the exact raw response returned by Google AI
+Studio.
+
+4.5 Step-by-step prompt
+
+Solve the following problem carefully.
+
+A shopkeeper buys 5 notebooks for Rs. 40 each. He sells 3 notebooks for
+Rs. 55 each and the remaining 2 notebooks for Rs. 35 each.
+
+Show the calculation in clear steps: 1. Calculate the total cost price.
+2. Calculate the total selling price. 3. Find the difference. 4. State
+whether it is a profit or loss.
+
+Give a concise explanation.
+
+4.6 Step-by-step output – illustrative sample only
+
+Step 1: Total cost price 5 x Rs. 40 = Rs. 200
+
+Step 2: Total selling price 3 x Rs. 55 = Rs. 165 2 x Rs. 35 = Rs. 70
+Total selling price = Rs. 165 + Rs. 70 = Rs. 235
+
+Step 3: Difference Profit = Selling price - Cost price Profit = Rs.
+235 - Rs. 200 = Rs. 35
+
+Step 4: Conclusion The shopkeeper makes a total profit of Rs. 35.
+
+
+4.7 Independent verification
+
+Cost price: 5 notebooks x Rs. 40 = Rs. 200
+
+Selling price: 3 notebooks x Rs. 55 = Rs. 165 2 notebooks x Rs. 35 = Rs.
+70 Total selling price = Rs. 235
+
+Profit: Rs. 235 - Rs. 200 = Rs. 35
+
+Correct answer: Profit of Rs. 35.
+
+4.8 Evaluation
+
+Check each model response for: - Correct total cost price. - Correct
+selling price for both groups of notebooks. - Correct difference between
+selling price and cost price. - Correct identification of profit rather
+than loss. - Clear and logically ordered explanation when requested.
+
+The direct prompt requests only the final answer, so it should be
+evaluated mainly on final-answer correctness. The step-by-step prompt
+should also be evaluated on whether its displayed calculations are
+correct.
+
+4.9 Analysis
+
+A direct prompt is efficient when only the final result is needed.
+However, it provides limited visibility into how the result was
+obtained.
+
+A step-by-step instruction encourages the model to organise the
+calculation into smaller, verifiable parts. This makes it easier for a
+reader to inspect intermediate values and identify arithmetic errors.
+
+This experiment evaluates the visible explanation and answer. It does
+not require or attempt to obtain hidden internal reasoning from the
+model.
+
+4.10 Result
+
+The independently verified answer is a profit of Rs. 35. Compare the
+actual Google AI Studio responses with this answer and record whether
+each prompt produced a correct result.
+
+============================================================ 5.
+EXPERIMENT 3 – STRUCTURED OUTPUT USING JSON
+============================================================
+
+5.1 Aim
+
+To test whether the model can extract invoice details from
+natural-language text and return them in a fixed JSON structure.
+
+5.2 Required JSON schema
+
+{ “customer_name”: “string or null”, “invoice_date”: “YYYY-MM-DD or
+null”, “amount”: “number or null”, “currency”: “string or null” }
+
+The amount must be a JSON number, not a quoted string. Missing
+information must be represented as null. The model must not invent
+missing values.
+
+5.3 Main prompt
+
+You are an invoice data extraction assistant.
+
+Extract the following fields from the input: customer_name invoice_date
+amount currency
+
+Return ONLY valid JSON.
+
+Follow this exact schema: { “customer_name”: “string”, “invoice_date”:
+“YYYY-MM-DD”, “amount”: 0, “currency”: “INR” }
+
+Rules: - Convert dates into YYYY-MM-DD format. - Amount must be a
+number, not a string. - Use INR as currency when the input uses the
+rupee symbol. - Do not add explanations or Markdown. - If a field is
+missing, use null. - Do not invent missing information.
+
+Invoice text: [INSERT ONE TEST CASE HERE]
+
+Note: The schema above illustrates the expected field types. For missing
+values, the output must use JSON null. The model should preserve a
+different currency when the input explicitly specifies one rather than
+changing it to INR.
+
+5.4 Initial missing-input test
+
+Input: No invoice text was supplied.
+
+Observed response previously provided by the user in Google AI Studio:
+
+{ “customer_name”: null, “invoice_date”: null, “amount”: null,
+“currency”: null }
+
+This is the user’s reported output for the empty-input test. It
+demonstrates missing-value handling. It is not counted as one of the
+five invoice extraction test cases below.
+
+5.5 Five invoice test cases
+
+TEST CASE 1
+
+Input: Invoice for Rahul Sharma, dated 15 November 2026, total amount
+Rs. 4,500.
+
+Illustrative expected JSON: { “customer_name”: “Rahul Sharma”,
+“invoice_date”: “2026-11-15”, “amount”: 4500, “currency”: “INR” }
+
+TEST CASE 2
+
+Input: Customer: Priya Kumar. Invoice date: 02/11/2026. Total payable:
+Rs. 2,750.
+
+Illustrative expected JSON: { “customer_name”: “Priya Kumar”,
+“invoice_date”: “2026-11-02”, “amount”: 2750, “currency”: “INR” }
+
+TEST CASE 3
+
+Input: Invoice issued to Arun Kumar on December 5, 2026. Amount due: Rs.
+8,999.
+
+Illustrative expected JSON: { “customer_name”: “Arun Kumar”,
+“invoice_date”: “2026-12-05”, “amount”: 8999, “currency”: “INR” }
+
+TEST CASE 4
+
+Input: Customer name: Meena. Invoice date: 2026-10-20. Total: Rs.
+1,250.50.
+
+Illustrative expected JSON: { “customer_name”: “Meena”, “invoice_date”:
+“2026-10-20”, “amount”: 1250.50, “currency”: “INR” }
+
+TEST CASE 5
+
+Input: Invoice date: 12 October 2026. Amount: Rs. 3,200. Currency: INR.
+
+Illustrative expected JSON: { “customer_name”: null, “invoice_date”:
+“2026-10-12”, “amount”: 3200, “currency”: “INR” }
+
+Important date note: For numeric dates such as 02/11/2026, date
+interpretation can depend on locale. This test assumes DD/MM/YYYY. If
+Google AI Studio interprets it differently, record the actual response
+and note the ambiguity. To remove ambiguity in a revised test, write the
+date as “2 November 2026”.
+
+5.6 JSON validation checklist
+
+For each of the five test cases, verify:
+
+1.  The response is parseable JSON.
+2.  All four required keys are present.
+3.  customer_name is a string or null.
+4.  invoice_date uses YYYY-MM-DD or null.
+5.  amount is a number or null, not a quoted numeric string.
+6.  currency is a string or null.
+7.  Missing information is represented as null.
+8.  No unsupported information has been invented.
+9.  No explanatory text or Markdown appears outside the JSON object.
+
+5.7 Evaluation table
+
+Case 1: Valid JSON: [Yes/No] All keys present: [Yes/No] Correct
+extracted values: [Yes/No] Passed: [Yes/No]
+
+Case 2: Valid JSON: [Yes/No] All keys present: [Yes/No] Correct
+extracted values: [Yes/No] Passed: [Yes/No]
+
+Case 3: Valid JSON: [Yes/No] All keys present: [Yes/No] Correct
+extracted values: [Yes/No] Passed: [Yes/No]
+
+Case 4: Valid JSON: [Yes/No] All keys present: [Yes/No] Correct
+extracted values: [Yes/No] Passed: [Yes/No]
+
+Case 5: Valid JSON: [Yes/No] All keys present: [Yes/No] Correct
+extracted values: [Yes/No] Passed: [Yes/No]
+
+Success rate: (Number of test cases that pass all required checks / 5) x
+100
+
+Do not fill in the pass/fail values until the five cases have actually
+been tested.
+
+5.8 Analysis
+
+Structured output prompting defines the exact keys, value types, date
+format, and missing-value behaviour expected from the model. This
+reduces ambiguity and makes responses easier to validate or consume in
+software.
+
+However, asking for JSON in a text prompt does not guarantee valid JSON.
+A response may contain Markdown fences, extra commentary, missing keys,
+incorrect types, or incorrectly interpreted dates.
+
+For production applications, validation should be performed by a JSON
+parser and schema validator. Where supported, a model API’s
+structured-output or JSON-schema mode can provide stronger format
+constraints. Prompt instructions alone should not be treated as a
+substitute for validation.
+
+5.9 Result
+
+The initial empty-input test returned null values for all four fields,
+according to the response supplied by the user. The five extraction
+cases must be run separately to calculate the final success rate.
+
+============================================================ 6.
+COMPARISON OF THE THREE TECHNIQUES
+============================================================
+
+Zero-shot prompting: - Uses instructions without examples. - Simple and
+concise. - Useful for familiar, straightforward tasks. - May leave more
+room for interpretation.
+
+Few-shot prompting: - Includes examples of desired input-output
+behaviour. - Helps communicate the classification pattern. - Uses more
+prompt tokens. - Results depend on the relevance and quality of
+examples.
+
+Direct prompting: - Requests the answer without a detailed
+explanation. - Efficient when only the final result is needed. -
+Provides less visible evidence of intermediate calculations.
+
+Step-by-step instruction: - Requests an organised, concise
+explanation. - Makes intermediate calculations easier to inspect. -
+Produces a longer response. - The explanation still needs independent
+verification.
+
+Structured JSON prompting: - Specifies keys, formats, and data types. -
+Supports consistent machine-readable responses. - Requires parsing and
+validation. - Can fail if the model adds extra text or produces
+incorrect values.
+
+============================================================ 7. OVERALL
+FINDINGS ============================================================
+
+The experiments illustrate that prompt structure influences the form and
+usefulness of an AI model’s response.
+
+1.  Examples in few-shot prompts communicate the expected classification
+    pattern.
+2.  Direct prompts are suitable for short answers, while explicit
+    calculation instructions make visible verification easier.
+3.  JSON schema instructions define a predictable response structure,
+    but actual output must still be validated.
+4.  Ambiguous input, especially numeric date formats and mixed
+    sentiment, should be clarified in the prompt or test data.
+5.  A fair comparison requires the same model, equivalent settings, and
+    the same test inputs wherever applicable.
+
+Final findings and performance percentages should be updated using the
+actual responses collected during testing.
+
+============================================================ 8.
+LIMITATIONS ============================================================
+
+-   Generative AI responses may vary between runs.
+-   A correct-looking response is not necessarily factually correct.
+-   Few-shot performance depends on the quality and representativeness
+    of examples.
+-   Sentiment classification can be subjective when a review contains
+    both positive and negative statements.
+-   Numeric date formats can be ambiguous across locales.
+-   Prompt-only JSON instructions do not guarantee schema compliance.
+-   A small number of test cases is not sufficient to establish general
+    model reliability.
+
+============================================================ 9.
+CONCLUSION ============================================================
+
+This task provided practical exposure to three important
+prompt-engineering approaches: zero-shot and few-shot prompting,
+explicit step-by-step task instructions, and structured JSON output
+prompting.
+
+The experiments show that prompts should clearly define the task,
+provide examples when useful, specify constraints, and describe the
+expected output format. They also show the importance of independently
+checking model responses rather than assuming that an answer is correct.
+
+The most suitable prompting technique depends on the application.
+Zero-shot prompting is useful for simple tasks, few-shot prompting can
+guide classification behaviour, step-by-step instructions can make
+calculations easier to verify, and structured output prompting is useful
+when data must be processed by software.
+
+============================================================ 10.
+APPENDIX – TEST EXECUTION RECORD
+============================================================
+
+Complete this section after running the prompts in Google AI Studio.
+
+Platform: Google AI Studio Model name/version: [Enter exact model shown
+in AI Studio] Temperature: [Record value if visible; otherwise write Not
+recorded] Testing date: [Enter date] Number of runs per prompt: [Enter
+number]
+
+Experiment 1: Zero-shot prompt executed: [Yes/No] Few-shot prompt
+executed: [Yes/No] Exact raw outputs saved: [Yes/No] Accuracy
+recalculated: [Yes/No]
+
+Experiment 2: Direct prompt executed: [Yes/No] Step-by-step prompt
+executed: [Yes/No] Exact raw outputs saved: [Yes/No] Answers
+independently verified: [Yes/No]
+
+Experiment 3: Empty-input test completed: Yes – output supplied by user
+Invoice test case 1 executed: [Yes/No] Invoice test case 2 executed:
+[Yes/No] Invoice test case 3 executed: [Yes/No] Invoice test case 4
+executed: [Yes/No] Invoice test case 5 executed: [Yes/No] JSON
+validation completed: [Yes/No] Success rate calculated: [Yes/No]
+
+============================================================ END OF
+REPORT ============================================================
